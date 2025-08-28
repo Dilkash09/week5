@@ -1,0 +1,30 @@
+<nav class="navbar">
+  <div class="nav-container">
+    <div class="nav-brand">
+      <h3>User Management</h3>
+    </div>
+    
+    <ul class="nav-menu">
+      <!-- Show login link only when NOT logged in -->
+      <li class="nav-item" *ngIf="!isLoggedIn()">
+        <a routerLink="/login" class="nav-link">Login</a>
+      </li>
+      
+      <!-- Show profile link only when logged in -->
+      <li class="nav-item" *ngIf="isLoggedIn()">
+        <a routerLink="/profile" class="nav-link">Profile</a>
+      </li>
+      
+      <!-- Show user info and logout when logged in -->
+      <li class="nav-item user-info" *ngIf="isLoggedIn()">
+        <span class="welcome-text">Welcome, {{ getUsername() }}</span>
+      </li>
+      
+      <li class="nav-item" *ngIf="isLoggedIn()">
+        <a href="#" class="nav-link logout-btn" (click)="logout(); $event.preventDefault()">
+          <i class="logout-icon">🚪</i> Logout
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>

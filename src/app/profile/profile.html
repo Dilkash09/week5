@@ -1,0 +1,57 @@
+<div class="profile-container" *ngIf="currentUser">
+  <div class="profile-header">
+    <h2>User Profile</h2>
+  </div>
+  
+  <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="profile-form">
+    <div class="form-group" [class.valid]="profileForm.get('username')?.valid && profileForm.get('username')?.touched"
+         [class.invalid]="profileForm.get('username')?.invalid && profileForm.get('username')?.touched">
+      <label>Username:</label>
+      <input type="text" formControlName="username" class="form-control" placeholder="Enter your username">
+      <div *ngIf="profileForm.get('username')?.invalid && profileForm.get('username')?.touched" 
+           class="error-message">
+        Username is required
+      </div>
+    </div>
+
+    <div class="form-group" [class.valid]="profileForm.get('email')?.valid && profileForm.get('email')?.touched"
+         [class.invalid]="profileForm.get('email')?.invalid && profileForm.get('email')?.touched">
+      <label>Email:</label>
+      <input type="email" formControlName="email" class="form-control" placeholder="Enter your email">
+      <div *ngIf="profileForm.get('email')?.invalid && profileForm.get('email')?.touched" 
+           class="error-message">
+        Valid email is required
+      </div>
+    </div>
+
+    <div class="form-group" [class.valid]="profileForm.get('birthdate')?.valid && profileForm.get('birthdate')?.touched"
+         [class.invalid]="profileForm.get('birthdate')?.invalid && profileForm.get('birthdate')?.touched">
+      <label>Birthdate:</label>
+      <input type="date" formControlName="birthdate" class="form-control">
+      <div *ngIf="profileForm.get('birthdate')?.invalid && profileForm.get('birthdate')?.touched" 
+           class="error-message">
+        Birthdate is required
+      </div>
+    </div>
+
+    <div class="form-group" [class.valid]="profileForm.get('age')?.valid && profileForm.get('age')?.touched"
+         [class.invalid]="profileForm.get('age')?.invalid && profileForm.get('age')?.touched">
+      <label>Age:</label>
+      <input type="number" formControlName="age" class="form-control" placeholder="Enter your age" min="1">
+      <div *ngIf="profileForm.get('age')?.invalid && profileForm.get('age')?.touched" 
+           class="error-message">
+        Valid age is required (minimum 1)
+      </div>
+    </div>
+
+    <button type="submit" class="submit-btn" [disabled]="!profileForm.valid">
+      Update Profile
+    </button>
+  </form>
+
+  <div class="user-info">
+    <h3>Current Session</h3>
+    <p><strong>Logged in as:</strong> {{currentUser.username}}</p>
+    <p><strong>Email:</strong> {{currentUser.email}}</p>
+  </div>
+</div>
